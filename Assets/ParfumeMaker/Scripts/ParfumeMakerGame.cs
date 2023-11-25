@@ -16,32 +16,63 @@ public class ParfumeMakerGame : MonoBehaviour
     [SerializeField] TMP_Text phText;
     [SerializeField] GameObject speakCanvas;
     [SerializeField] int curPhrase;
+    [SerializeField] int curIngr;
     [SerializeField] string speaker;
+    [SerializeField] GameObject bottleHolder;
+    [SerializeField] GameObject bottle;
     public void onClick() {
-        if (curPhrase < phrase.Count-1) {
-            speakCanvas.SetActive(false);
-            curPhrase++;
-            phText.text = phrase[curPhrase];
-        }
-        else {
-            SceneManager.LoadScene("Congratulations!");
+        if (curPhrase < phrase.Count) {
+            if (curPhrase > 0)
+            {
+                speakCanvas.SetActive(false);
+            }
+            if (curPhrase < phrase.Count-1)
+            {
+                curPhrase++;
+                phText.text = phrase[curPhrase];
+            }
         }
     }
     void Awake()
     {
+        spText.text = speaker;
+        phText.text = phrase[0];
+        curPhrase = 0;
         for (int i = 0; i < unused.Count; i++)
         {
             unused[i] = i;
         }
+        List <int> recipeCopy = new List<int>(0);
         for (int i = 0; i < recipe.Count; i++)
         {
             int cur = Random.Range(0, unused.Count);
             recipe[i] = unused[cur];
+            recipeCopy.Add(unused[cur]);
+            phrase.Add(ingrPhrases[unused[cur]]);
             unused.RemoveAt(cur);
         }
+        for (int i = 0; i < recipe.Count; i++)
+        {
+            int cur = Random.Range(0, recipeCopy.Count);
+            GameObject curBottle = Instantiate(bottle, bottleHolder.transform);
+            curBottle.GetComponent<Bottle>().SetBottle(recipeCopy[cur], bottleNames[recipeCopy[cur]]);
+            recipeCopy.RemoveAt(cur);
+        }
     }
-    public void addIngridient(int ingr) {
-        
+    public void addIngridient(int ingr) 
+    {
+        if (recipe[curIngr] == ingr)
+        {
+            if (curIngr == recipe.Count-1)
+            {
+                SceneManager.LoadScene("Congratulations");
+            }
+            else
+            {
+                speakCanvas.SetActive(true);
+                curIngr++;
+            }
+        }
     }
     // Start is called before the first frame update
     void Start()

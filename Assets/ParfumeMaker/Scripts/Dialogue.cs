@@ -12,13 +12,7 @@ public class Dialogue : MonoBehaviour
     [SerializeField] GameObject speakCanvas;
     [SerializeField] int curPhrase;
     public void onClick() {
-        if (!speakCanvas.activeSelf && speaker.Count > 0) {
-            curPhrase++;
-            spText.text = speaker[curPhrase];
-            phText.text = phrase[curPhrase];
-            speakCanvas.SetActive(true);
-        }
-        else if (curPhrase < speaker.Count-1) {
+        if (curPhrase < speaker.Count-1) {
             curPhrase++;
             spText.text = speaker[curPhrase];
             phText.text = phrase[curPhrase];
@@ -28,9 +22,11 @@ public class Dialogue : MonoBehaviour
         }
     }
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        curPhrase = -1;
+        spText.text = speaker[0];
+        phText.text = phrase[0];
+        curPhrase = 0;
     }
 
     // Update is called once per frame

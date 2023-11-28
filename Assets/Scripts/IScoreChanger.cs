@@ -1,12 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface IScoreChanger
+public interface IScoreChanger //interface for all cases of mini games
 { 
-    int RightScore { get; set; }
-    int WrongScore { get; set; }
-
+    int ScoreChanging { get; set; }
     void ChangeScore();
     void DoRightFeedBack();
     void DoWrongFeedBack();

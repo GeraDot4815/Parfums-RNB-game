@@ -552,6 +552,7 @@ MonoBehaviour:
   phText: {fileID: 1118060645}
   speakCanvas: {fileID: 1407805085}
   variantsPanel: {fileID: 177570487}
+  nextScene: ParfumeMaker
 --- !u!4 &549666205
 Transform:
   m_ObjectHideFlags: 0

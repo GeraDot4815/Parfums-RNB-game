@@ -12,32 +12,13 @@ public class ParfumeMakerGame : MonoBehaviour
     [SerializeField] List<string> bottleNames = new List<string> {"Цис-3 Гексенол", "Геосмин", "Амбринол"};
     [SerializeField] List<int> recipe;
     [SerializeField] List<int> unused;
-    [SerializeField] TMP_Text spText;
-    [SerializeField] TMP_Text phText;
-    [SerializeField] GameObject speakCanvas;
-    [SerializeField] int curPhrase;
     [SerializeField] int curIngr;
     [SerializeField] string speaker;
     [SerializeField] GameObject bottleHolder;
     [SerializeField] GameObject bottle;
-    public void onClick() {
-        if (curPhrase < phrase.Count) {
-            if (curPhrase > 0)
-            {
-                speakCanvas.SetActive(false);
-            }
-            if (curPhrase < phrase.Count-1)
-            {
-                curPhrase++;
-                phText.text = phrase[curPhrase];
-            }
-        }
-    }
+    [SerializeField] DialogueManager dialManager;
     void Awake()
     {
-        spText.text = speaker;
-        phText.text = phrase[0];
-        curPhrase = 0;
         for (int i = 0; i < unused.Count; i++)
         {
             unused[i] = i;
@@ -48,7 +29,6 @@ public class ParfumeMakerGame : MonoBehaviour
             int cur = Random.Range(0, unused.Count);
             recipe[i] = unused[cur];
             recipeCopy.Add(unused[cur]);
-            phrase.Add(ingrPhrases[unused[cur]]);
             unused.RemoveAt(cur);
         }
         for (int i = 0; i < recipe.Count; i++)
@@ -59,25 +39,32 @@ public class ParfumeMakerGame : MonoBehaviour
             recipeCopy.RemoveAt(cur);
         }
     }
+    public void Start()
+    {
+        dialManager.AddSentense("Профессор",ingrPhrases[recipe[0]], true);
+    }
     public void addIngridient(int ingr) 
     {
         if (recipe[curIngr] == ingr)
         {
             if (curIngr == recipe.Count-1)
             {
-                SceneManager.LoadScene("Congratulations");
+                dialManager.AddSentense("Профессор","У вас получилось! Спасибо вам!");
+                dialManager.EnableDialogue();
             }
             else
             {
-                speakCanvas.SetActive(true);
                 curIngr++;
+                dialManager.AddSentense("Профессор",ingrPhrases[curIngr], true);
+                dialManager.EnableDialogue();
             }
         }
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+        else
+        {
+            dialManager.AddSentense("Профессор", "Попробуйте еще раз.");
+            dialManager.AddSentense("Профессор", ingrPhrases[curIngr], true);
+            dialManager.EnableDialogue();
+        }
     }
 
     // Update is called once per frame

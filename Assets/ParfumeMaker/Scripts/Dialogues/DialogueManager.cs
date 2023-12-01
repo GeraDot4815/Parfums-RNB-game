@@ -19,7 +19,7 @@ public class DialogueManager : MonoBehaviour //omg
     [SerializeField] private GameObject speakCanvas;
 
     [SerializeField] private GameObject variantsPanel;
-
+    [SerializeField] private string nextScene;
     private int curPhrase;
     private int curDialogueIdx;
     private Dialogue curDialogue;
@@ -60,11 +60,21 @@ public class DialogueManager : MonoBehaviour //omg
         }
         else if (index < mDialogues.Count - 1) //if we have another dialogues, we run it
         {
-            StartNewDialogue(index+1);
+            if (!mDialogues[index].sentenses[mDialogues[index].sentenses.Count-1].interact)
+            {
+                StartNewDialogue(index+1);
+            }
         }
         else //all dialogues played
         {
-            SceneManager.LoadScene("ParfumeMaker"); //it is better to use indexes or references
+            if (!mDialogues[index].sentenses[mDialogues[index].sentenses.Count-1].interact)
+            {
+                SceneManager.LoadScene(nextScene); //it is better to use indexes or references
+            }
+            else
+            {
+                speakCanvas.SetActive(false);
+            }
         }
     }
     public void OpenVariantsPanel(DialogueChoose dialogueChoose)
@@ -90,12 +100,44 @@ public class DialogueManager : MonoBehaviour //omg
         variantsPanel.SetActive(false);
         OnDialogueEnds(curDialogueIdx);
     }
+    public void EnableDialogue()
+    {
+        curPhrase++;
+        spText.text = curDialogue.sentenses[curPhrase].speaker;
+        phText.text = curDialogue.sentenses[curPhrase].phrase;
+        speakCanvas.SetActive(true);
+    }
+    public void DisableDialogue()
+    {
+        speakCanvas.SetActive(true);
+    }
+    public void AddSentense(string speaker, string phrase)
+    {
+        curDialogue.sentenses.Add(new Sentense(speaker,phrase));
+    }
+    public void AddSentense(string speaker, string phrase, bool interact)
+    {
+        curDialogue.sentenses.Add(new Sentense(speaker,phrase,interact));
+    }
 }
 [System.Serializable]
 public class Sentense
 {
     public string speaker;
     public string phrase;
+    public bool interact; //leads to interaction (like in parfumeMaker game). Because of it, the last sentense in a dialogue should have interact == false, or else you'll have to do everything you want by yourself
+    public Sentense(string speaker, string phrase)
+    {
+        this.speaker = speaker;
+        this.phrase = phrase;
+        interact = false;
+    }
+    public Sentense(string speaker, string phrase, bool interact)
+    {
+        this.speaker = speaker;
+        this.phrase = phrase;
+        this.interact = interact;
+    }
 }
 [System.Serializable]
 public class Dialogue

@@ -77,7 +77,7 @@ public class DialogueManager : MonoBehaviour //omg
 
             if (!mDialogues[index].sentenses[mDialogues[index].sentenses.Count-1].interact)
             {
-                if (mDialogues[index+1].character.sprite != null && curDialogue.character.sprite != null)
+                /*if (mDialogues[index+1].character.sprite != null && curDialogue.character.sprite != null)
                 {
                     //curDialogue.character.anim = characterAnimator;
                     curDialogue.character.Hide(characterAnimator.sourseImg);
@@ -86,7 +86,7 @@ public class DialogueManager : MonoBehaviour //omg
                 {
                     //curDialogue.background.anim = bgAnimator;
                     curDialogue.background.Hide(bgAnimator.sourseImg);
-                }
+                }*/
                 StartNewDialogue(index+1);
             }
 

@@ -23,7 +23,10 @@ public class DialogueManager : MonoBehaviour //omg
     private int curPhrase;
     private int curDialogueIdx;
     private Dialogue curDialogue;
-    private void Awake()
+
+    [SerializeField] private DialogueAnimator characterAnimator;
+    [SerializeField] private DialogueAnimator bgAnimator;
+    private void Start()
     {
         instance = this;
         variantsPanel.SetActive(false);
@@ -49,6 +52,17 @@ public class DialogueManager : MonoBehaviour //omg
         curPhrase= 0;
         spText.text = curDialogue.sentenses[curPhrase].speaker;
         phText.text = curDialogue.sentenses[curPhrase].phrase;
+
+        if (curDialogue.character.sprite != null)
+        {
+            curDialogue.character.anim = characterAnimator;
+            curDialogue.character.Show(characterAnimator.sourseImg);
+        }
+        if (curDialogue.background.sprite != null)
+        {
+            curDialogue.background.anim = bgAnimator;
+            curDialogue.background.Show(bgAnimator.sourseImg);
+        }
     }
     private void OnDialogueEnds(int index) //what we want to do after last phrase
     {
@@ -60,10 +74,22 @@ public class DialogueManager : MonoBehaviour //omg
         }
         else if (index < mDialogues.Count - 1) //if we have another dialogues, we run it
         {
+
             if (!mDialogues[index].sentenses[mDialogues[index].sentenses.Count-1].interact)
             {
+                if (mDialogues[index+1].character.sprite != null && curDialogue.character.sprite != null)
+                {
+                    //curDialogue.character.anim = characterAnimator;
+                    curDialogue.character.Hide(characterAnimator.sourseImg);
+                }
+                if (mDialogues[index+1].background.sprite != null && curDialogue.background.sprite != null)
+                {
+                    //curDialogue.background.anim = bgAnimator;
+                    curDialogue.background.Hide(bgAnimator.sourseImg);
+                }
                 StartNewDialogue(index+1);
             }
+
         }
         else //all dialogues played
         {
@@ -124,6 +150,7 @@ public class DialogueManager : MonoBehaviour //omg
 public class Sentense
 {
     public string speaker;
+    [TextArea(order =3)]
     public string phrase;
     public bool interact; //leads to interaction (like in parfumeMaker game). Because of it, the last sentense in a dialogue should have interact == false, or else you'll have to do everything you want by yourself
     public Sentense(string speaker, string phrase)
@@ -142,6 +169,8 @@ public class Sentense
 [System.Serializable]
 public class Dialogue
 {
+    public Character character;
+    public BackGround background;
     public List<Sentense> sentenses;
     public DialogueChoose selection;
 }

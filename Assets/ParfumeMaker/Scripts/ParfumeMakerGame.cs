@@ -39,7 +39,7 @@ public class ParfumeMakerGame : MonoBehaviour
     }
     public void Start()
     {
-        dialManager.AddSentense("Профессор",ingrPhrases[recipe[0]], true);
+        dialManager.AddSentense("Директор фабрики",ingrPhrases[recipe[0]], true);
     }
     public void addIngridient(int ingr) 
     {
@@ -47,20 +47,29 @@ public class ParfumeMakerGame : MonoBehaviour
         {
             if (curIngr == recipe.Count-1)
             {
-                dialManager.AddSentense("Профессор","У вас получилось! Спасибо вам!");
+                dialManager.AddSentense("Директор фабрики","У вас получилось! Спасибо вам!");
                 dialManager.EnableDialogue();
             }
             else
             {
                 curIngr++;
+<<<<<<< Updated upstream
                 dialManager.AddSentense("Профессор",ingrPhrases[recipe[curIngr]], true);
+=======
+                dialManager.AddSentense("Директор фабрики",ingrPhrases[recipe[curIngr]], true);
+>>>>>>> Stashed changes
                 dialManager.EnableDialogue();
             }
         }
         else
         {
+<<<<<<< Updated upstream
             dialManager.AddSentense("Профессор", "Попробуйте еще раз.");
             dialManager.AddSentense("Профессор", ingrPhrases[recipe[curIngr]], true);
+=======
+            dialManager.AddSentense("Директор фабрики", "Попробуйте еще раз.");
+            dialManager.AddSentense("Директор фабрики", ingrPhrases[recipe[curIngr]], true);
+>>>>>>> Stashed changes
             dialManager.EnableDialogue();
         }
     }

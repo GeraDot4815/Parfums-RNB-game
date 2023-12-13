@@ -23,12 +23,6 @@ public class DialogueManager : MonoBehaviour //omg
     private int curPhrase;
     private int curDialogueIdx;
     private Dialogue curDialogue;
-<<<<<<< Updated upstream:Assets/ParfumeMaker/Scripts/Dialogues/DialogueManager.cs
-=======
-
-    [SerializeField] private DialogueAnimator characterAnimator;
-    [SerializeField] private DialogueAnimator bgAnimator;
->>>>>>> Stashed changes:Assets/Scripts/Dialogues/DialogueManager.cs
     private void Awake()
     {
         instance = this;
@@ -123,7 +117,6 @@ public class DialogueManager : MonoBehaviour //omg
     }
     public void AddSentense(string speaker, string phrase, bool interact)
     {
-        Debug.Log(curDialogue);
         curDialogue.sentenses.Add(new Sentense(speaker,phrase,interact));
     }
 }

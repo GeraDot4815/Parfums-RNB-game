@@ -105,9 +105,9 @@ public class DialogueManager : MonoBehaviour //omg
     }
     public void OpenVariantsPanel(DialogueChoose dialogueChoose)
     {
-        variantsPanel.SetActive(true);
+        DisableButtons();        //buttons without selections will be invisible
 
-        DisableButtons(); //buttons without selections will be invisible
+        variantsPanel.SetActive(true);
 
         dialogueChoose.InitializeVariants();
     }

@@ -141,5 +141,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fec193e2aa395874391f2c73d03ba95f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <rightAnswerSound>k__BackingField: {fileID: 8300000, guid: 2ee192dbd4eca934097b6974dd1cdd0e, type: 3}
-  <wrongAnswerSound>k__BackingField: {fileID: 8300000, guid: 324cba302e4bd544da84f5db22171d08, type: 3}
+  <rightAnswerSound>k__BackingField: {fileID: 8300000, guid: bf86772714d8f7a4592750ec6e129f41, type: 3}
+  <wrongAnswerSound>k__BackingField: {fileID: 8300000, guid: fd32de19defd38d4fa956a982334bb7b, type: 3}

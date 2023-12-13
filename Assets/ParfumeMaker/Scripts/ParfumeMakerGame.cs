@@ -6,10 +6,8 @@ using TMPro;
 public class ParfumeMakerGame : MonoBehaviour
 {
     [SerializeField] List<string> phrase;
-    [SerializeField] List<string> ingrPhrases = new List<string> {"Композиции надо придать свежести и сочности. Подай-ка бутылек. Только нос заткни...", 
-    "Надо, чтоб духи лучше распространялись... Советую закрыть нос...", 
-    "Любишь запах амбра и табака? Думаю, он бы тут помог. Подай-ка ингридиент"};
-    [SerializeField] List<string> bottleNames = new List<string> {"Цис-3 Гексенол", "Геосмин", "Амбринол"};
+    [SerializeField] List<string> ingrPhrases;
+    [SerializeField] List<string> bottleNames;
     [SerializeField] List<int> recipe;
     [SerializeField] List<int> unused;
     [SerializeField] int curIngr;
@@ -55,14 +53,14 @@ public class ParfumeMakerGame : MonoBehaviour
             else
             {
                 curIngr++;
-                dialManager.AddSentense("Профессор",ingrPhrases[curIngr], true);
+                dialManager.AddSentense("Профессор",ingrPhrases[recipe[curIngr]], true);
                 dialManager.EnableDialogue();
             }
         }
         else
         {
             dialManager.AddSentense("Профессор", "Попробуйте еще раз.");
-            dialManager.AddSentense("Профессор", ingrPhrases[curIngr], true);
+            dialManager.AddSentense("Профессор", ingrPhrases[recipe[curIngr]], true);
             dialManager.EnableDialogue();
         }
     }

@@ -69,6 +69,7 @@ public class GameControll : MonoBehaviour
     public void SelectUpdate(Tile tile)
     {
         if (wait) { return; }
+        if (tile == select) { return; }
 
 
         if (select != null)

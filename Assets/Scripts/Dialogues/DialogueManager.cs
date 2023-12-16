@@ -78,6 +78,7 @@ public class DialogueManager : MonoBehaviour //omg
             if (!mDialogues[index].sentenses[mDialogues[index].sentenses.Count-1].interact)
             {
                 StartNewDialogue(index+1);
+                
             }
 
         }

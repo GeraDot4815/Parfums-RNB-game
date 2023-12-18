@@ -23,7 +23,19 @@ public class DialogueManager : MonoBehaviour //omg
     private int curPhrase;
     private int curDialogueIdx;
     private Dialogue curDialogue;
+<<<<<<< Updated upstream:Assets/ParfumeMaker/Scripts/Dialogues/DialogueManager.cs
     private void Awake()
+=======
+
+    [SerializeField] private DialogueAnimator characterAnimator;
+    [SerializeField] private DialogueAnimator bgAnimator;
+    void Awake()
+    {
+        curDialogueIdx= 0;
+        curDialogue= mDialogues[0];
+    }
+    private void Start()
+>>>>>>> Stashed changes:Assets/Scripts/Dialogues/DialogueManager.cs
     {
         instance = this;
         variantsPanel.SetActive(false);
@@ -44,8 +56,6 @@ public class DialogueManager : MonoBehaviour //omg
     }
     private void StartNewDialogue(int index) //run another dialogue sequence
     {
-        curDialogueIdx= index;
-        curDialogue= mDialogues[curDialogueIdx];
         curPhrase= 0;
         spText.text = curDialogue.sentenses[curPhrase].speaker;
         phText.text = curDialogue.sentenses[curPhrase].phrase;

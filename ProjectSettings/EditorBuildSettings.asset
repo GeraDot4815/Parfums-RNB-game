@@ -15,11 +15,14 @@ EditorBuildSettings:
     path: Assets/Scenes/ParfumeMaker.unity
     guid: 7613949a84fd2706199ae7dc37da8435
   - enabled: 1
-    path: Assets/Scenes/Congratulations.unity
-    guid: 4ceeac7c1b1e5beb1be4f357e3bcbfb2
+    path: Assets/Scenes/Dialogue 2.unity
+    guid: 85316300e6730db49ac9db94fccd1b8c
   - enabled: 1
     path: Assets/Scenes/Memory.unity
     guid: 9332a4add0b0a2448a7c87f7cfc42878
+  - enabled: 1
+    path: Assets/Scenes/Dialogue 3.unity
+    guid: f9b3440e5cbeabe4ab217185d9875c00
   - enabled: 1
     path: Assets/Scenes/Victorina.unity
     guid: 802e207a156d7d64e9b26159035fa9bf

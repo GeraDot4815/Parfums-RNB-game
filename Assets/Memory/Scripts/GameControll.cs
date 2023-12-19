@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class GameControll : MonoBehaviour
 {
@@ -17,7 +19,11 @@ public class GameControll : MonoBehaviour
 
     [SerializeField] private float Xspace = 4f;
     [SerializeField] private float Yspace = -5f;
-    [SerializeField] private int score = 0;
+
+    [SerializeField] private string nextScene;
+    //[SerializeField] 
+    private int score = 0;
+    private int needToWin;
 
     private Tile select;
     private Tile openNow;
@@ -33,6 +39,8 @@ public class GameControll : MonoBehaviour
     private void Start()
     {
         GameStart();
+        score = 0;
+        needToWin=images.Length;
     }
 
     private void GameStart()
@@ -107,6 +115,10 @@ public class GameControll : MonoBehaviour
         if (select.GetId() == openNow.GetId())
         {
             score++;
+            if (score >= needToWin)
+            {
+                SceneManager.LoadScene(nextScene);
+            }
         }
         else
         {

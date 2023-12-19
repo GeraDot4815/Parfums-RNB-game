@@ -1,7 +1,7 @@
 public static class ScoreManager //it will be updated
 {
     public static int NowScore {  get; private set; }
-    public const int NeedToWin = 10;
+    public const int NeedToWin = 50;
     public static void SetZeroScore() //we need to run it on START (in some "Game manager" script)
     {
         NowScore = 0;

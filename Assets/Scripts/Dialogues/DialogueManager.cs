@@ -77,17 +77,8 @@ public class DialogueManager : MonoBehaviour //omg
 
             if (!mDialogues[index].sentenses[mDialogues[index].sentenses.Count-1].interact)
             {
-                if (mDialogues[index+1].character.sprite != null && curDialogue.character.sprite != null)
-                {
-                    //curDialogue.character.anim = characterAnimator;
-                    curDialogue.character.Hide(characterAnimator.sourseImg);
-                }
-                if (mDialogues[index+1].background.sprite != null && curDialogue.background.sprite != null)
-                {
-                    //curDialogue.background.anim = bgAnimator;
-                    curDialogue.background.Hide(bgAnimator.sourseImg);
-                }
                 StartNewDialogue(index+1);
+                
             }
 
         }
@@ -95,7 +86,7 @@ public class DialogueManager : MonoBehaviour //omg
         {
             if (!mDialogues[index].sentenses[mDialogues[index].sentenses.Count-1].interact)
             {
-                SceneManager.LoadScene(nextScene); //it is better to use indexes or references
+                LoadNextScene();
             }
             else
             {
@@ -103,11 +94,15 @@ public class DialogueManager : MonoBehaviour //omg
             }
         }
     }
+    protected virtual void LoadNextScene()
+    {
+        SceneManager.LoadScene(nextScene); //it is better to use indexes or references
+    }
     public void OpenVariantsPanel(DialogueChoose dialogueChoose)
     {
-        variantsPanel.SetActive(true);
+        DisableButtons();        //buttons without selections will be invisible
 
-        DisableButtons(); //buttons without selections will be invisible
+        variantsPanel.SetActive(true);
 
         dialogueChoose.InitializeVariants();
     }

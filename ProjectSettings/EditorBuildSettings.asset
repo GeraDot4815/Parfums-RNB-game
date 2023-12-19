@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: f8f7ad15b9744e046841d8c9515f809b
   - enabled: 1
-    path: Assets/Scenes/ParfumeMakerDialogue.unity
+    path: Assets/Scenes/Dialogue1.unity
     guid: e2e341031b37be6618f566293951f2d6
   - enabled: 1
     path: Assets/Scenes/ParfumeMaker.unity
@@ -20,4 +20,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Memory.unity
     guid: 9332a4add0b0a2448a7c87f7cfc42878
+
   m_configObjects: {}

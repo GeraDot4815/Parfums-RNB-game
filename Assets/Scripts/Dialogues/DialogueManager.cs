@@ -26,6 +26,12 @@ public class DialogueManager : MonoBehaviour //omg
 
     [SerializeField] private DialogueAnimator characterAnimator;
     [SerializeField] private DialogueAnimator bgAnimator;
+    private void Awake()
+    {
+        curDialogueIdx= 0;
+        curDialogue= mDialogues[0];
+        curPhrase= 0;
+    }
     private void Start()
     {
         instance = this;

@@ -6,10 +6,8 @@ using TMPro;
 public class ParfumeMakerGame : MonoBehaviour
 {
     [SerializeField] List<string> phrase;
-    [SerializeField] List<string> ingrPhrases = new List<string> {"Композиции надо придать свежести и сочности. Подай-ка бутылек. Только нос заткни...", 
-    "Надо, чтоб духи лучше распространялись... Советую закрыть нос...", 
-    "Любишь запах амбра и табака? Думаю, он бы тут помог. Подай-ка ингридиент"};
-    [SerializeField] List<string> bottleNames = new List<string> {"Цис-3 Гексенол", "Геосмин", "Амбринол"};
+    [SerializeField] List<string> ingrPhrases;
+    [SerializeField] List<string> bottleNames;
     [SerializeField] List<int> recipe;
     [SerializeField] List<int> unused;
     [SerializeField] int curIngr;
@@ -17,6 +15,9 @@ public class ParfumeMakerGame : MonoBehaviour
     [SerializeField] GameObject bottleHolder;
     [SerializeField] GameObject bottle;
     [SerializeField] DialogueManager dialManager;
+    [SerializeField] int ScoreWin;
+    [SerializeField] int ScoreLoss;
+    private AudioManager am; //sound player link
     void Awake()
     {
         for (int i = 0; i < unused.Count; i++)
@@ -41,28 +42,51 @@ public class ParfumeMakerGame : MonoBehaviour
     }
     public void Start()
     {
-        dialManager.AddSentense("Профессор",ingrPhrases[recipe[0]], true);
+        dialManager.AddSentense(speaker,ingrPhrases[recipe[0]], true);
+    }
+    public void DoRightFeedBack() 
+    {
+        am.audioSource.PlayOneShot(am.rightAnswerSound);
+    }
+
+    public void DoWrongFeedBack()
+    {
+        am.audioSource.PlayOneShot(am.wrongAnswerSound);
+    }
+    private void AddScore()
+    {
+        am = AudioManager.instance; 
+        ScoreManager.ChangeScoreOn(ScoreWin);
+        am.audioSource.PlayOneShot(am.rightAnswerSound);
+    }
+    private void LoseScore()
+    {
+        am = AudioManager.instance; 
+        ScoreManager.ChangeScoreOn(-ScoreLoss);
+        am.audioSource.PlayOneShot(am.wrongAnswerSound);
     }
     public void addIngridient(int ingr) 
     {
         if (recipe[curIngr] == ingr)
         {
+            AddScore();
             if (curIngr == recipe.Count-1)
             {
-                dialManager.AddSentense("Профессор","У вас получилось! Спасибо вам!");
+                dialManager.AddSentense(speaker,"У вас получилось! Спасибо вам!");
                 dialManager.EnableDialogue();
             }
             else
             {
                 curIngr++;
-                dialManager.AddSentense("Профессор",ingrPhrases[curIngr], true);
+                dialManager.AddSentense(speaker,ingrPhrases[recipe[curIngr]], true);
                 dialManager.EnableDialogue();
             }
         }
         else
         {
-            dialManager.AddSentense("Профессор", "Попробуйте еще раз.");
-            dialManager.AddSentense("Профессор", ingrPhrases[curIngr], true);
+            LoseScore();
+            dialManager.AddSentense(speaker, "Попробуйте еще раз.");
+            dialManager.AddSentense(speaker, ingrPhrases[recipe[curIngr]], true);
             dialManager.EnableDialogue();
         }
     }

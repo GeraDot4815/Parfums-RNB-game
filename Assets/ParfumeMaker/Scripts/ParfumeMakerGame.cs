@@ -72,7 +72,7 @@ public class ParfumeMakerGame : MonoBehaviour
             AddScore();
             if (curIngr == recipe.Count-1)
             {
-                dialManager.AddSentense(speaker,"У вас получилось! Спасибо вам!");
+                dialManager.AddSentense(speaker,"Верно! У тебя  все получилось!");
                 dialManager.EnableDialogue();
             }
             else

@@ -8,7 +8,7 @@ public class GameControll : MonoBehaviour
     public static GameControll Instance;
     public Sprite defaultImage;
 
-    [SerializeField] private Sprite[] images;
+    [SerializeField] private GameObject[] images;
     [SerializeField] private Transform startPosition;
 
     [SerializeField] private GameObject prefabTile;
@@ -55,12 +55,15 @@ public class GameControll : MonoBehaviour
                 Tile tileInstant = gameObject.GetComponent<Tile>();
                 int index = j * columns + i;
                 int id = boardPosition[index];
-                tileInstant.imageSelect = images[id];
+                GameObject nowImage = Instantiate(images[id]);
+                tileInstant.childImage = nowImage.transform.GetComponent<SpriteRenderer>();
+                tileInstant.childImage.enabled = false;
                 tileInstant.SetId(id);
                 
                 float positionX = (Xspace * i) + position.x;
                 float positionY = (Yspace * j) + position.y;
 
+                nowImage.transform.position = new Vector3(positionX, positionY, position.z);
                 gameObject.transform.position = new Vector3(positionX, positionY, position.z);
             }
         }

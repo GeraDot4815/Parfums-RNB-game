@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    public Sprite imageSelect;
     private SpriteRenderer image;
 
     [SerializeField] private int idTile;
+    public SpriteRenderer childImage;
 
     void Start()
     {
         image = GetComponent<SpriteRenderer>();
         image.sprite = GameControll.Instance.defaultImage;
+        childImage.enabled = false;
     }
 
     public void SetId(int id)
@@ -27,12 +28,15 @@ public class Tile : MonoBehaviour
 
     public void ActiveImage()
     {
-        image.sprite = imageSelect;
+        image.enabled = false;
+        childImage.enabled = true;
     }
     
     public void DeactiveImage()
     {
         image.sprite = GameControll.Instance.defaultImage;
+        image.enabled = true;    
+        childImage.enabled = false;
     }
 
     public void OnMouseDown()

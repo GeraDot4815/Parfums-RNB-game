@@ -1546,8 +1546,8 @@ MonoBehaviour:
   nextScene: 
   characterAnimator: {fileID: 828907555}
   bgAnimator: {fileID: 2125034322}
-  GoodEndIndex: 8
-  BadEndIndex: 7
+  GoodEndIndex: 7
+  BadEndIndex: 6
 --- !u!1001 &6304275281943357942
 PrefabInstance:
   m_ObjectHideFlags: 0
